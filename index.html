@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Form</title>
+    <script type="text/javascript">
+        function launchChatbot() {
+            var input1 = document.getElementById("input1").value;
+            var input2 = document.getElementById("input2").value;
+            var input3 = document.getElementById("input3").value;
+            var input4 = document.getElementById("input4").value;
+            var input5 = document.getElementById("input5").value;
+            var input6 = document.getElementById("input6").value;
+            var input7 = document.getElementById("input7").value;
+            var input8 = document.getElementById("input8").value;
+            var input9 = document.getElementById("input9").value;
+            var input10 = document.getElementById("input10").value;
+
+            window.ymConfig = {
+                "bot": "x1683541740113",
+                "host": "https://r3.cloud.yellow.ai",
+                "hideChatButton": "true",
+                triggerJourney: "5c-requesting-for-sellers-receipt_elmpcb",
+                "payload": {
+                    "Registered Email": input1,
+                    "Full Name": input2,
+                    "Subject": input3,
+                    "Language": input4,
+                    "Segment": input5,
+                    "Segment Affected": input6,
+                    "Description": input7,
+                    "Order/Sale ID": input8,
+                    "Country": input9,
+                    "Power Seller": input10
+                }
+            };
+            
+            (function () {
+                var w = window,
+                    ic = w.YellowMessenger;
+                if ("function" === typeof ic)
+                    ic("reattach_activator"), ic("update", ymConfig);
+                else {
+                    var d = document,
+                        i = function () {
+                            i.c(arguments)
+                        };
+                    i.q = [], i.c = function (e) {
+                        i.q.push(e)
+                    }, w.YellowMessenger = i;
+                    var e = d.createElement("script");
+                    e.type = "text/javascript", e.async = !0, e.src = "https://cdn.yellowmessenger.com/plugin/widget-v2/latest/dist/main.min.js";
+                    var t = d.getElementsByTagName("script")[0];
+                    t.parentNode.insertBefore(e, t);
+                }
+            })();
+        }
+        window.addEventListener('message', function(eventData) {
+
+        eventData = JSON.parse(eventData.data)
+
+        console.log(eventData, "eventData"); //Check incoming eventData
+
+        // to handle successful API hit to create email via contact form
+        if(eventData.event_code == "message-received" && (eventData.data == "Create Email Contact Form Success")) {
+            alert("Email Created Successfully");
+        }
+
+        // to handle failure API hit to create email via contact form
+        if(eventData.event_code == "message-received" && (eventData.data == "Failure"))
+            alert("FAILURE");
+        })
+    </script>
+</head>
+<body>
+    <h1>Input Form</h1>
+    <form onsubmit="launchChatbot(); return false;">
+        <label for="input1">Your email address:</label>
+        <input type="text" id="input1" name="input1" required><br><br>
+        
+        <label for="input2">Full Name:</label>
+        <input type="text" id="input2" name="input2" required><br><br>
+        
+        <label for="input3">Subject:</label>
+        <input type="text" id="input3" name="input3" required><br><br>
+        
+        <label for="input4">Your Language:</label>
+        <input type="text" id="input4" name="input4" required><br><br>
+        
+        <label for="input5">Issue Type:</label>
+        <input type="text" id="input5" name="input5" required><br><br>
+        
+        <label for="input6">Affected Issue:</label>
+        <input type="text" id="input6" name="input6" required><br><br>
+        
+        <label for="input7">Description:</label>
+        <input type="text" id="input7" name="input7" required><br><br>
+        
+        <label for="input8">Order/Sale Reference Number:</label>
+        <input type="text" id="input8" name="input8" required><br><br>
+        
+        <label for="input9">Country:</label>
+        <input type="text" id="input9" name="input9" required><br><br>
+        
+        <label for="input10">Power Seller:</label>
+        <input type="text" id="input10" name="input10" required><br><br>
+        
+        <input type="submit" value="Launch Chatbot">
+    </form>
+</body>
+</html>
